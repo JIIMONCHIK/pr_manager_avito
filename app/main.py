@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 from . import models
 from .database import engine
-from .routers import teams, users, pull_requests, health
+from .routers import teams, users, pull_requests, health, stats
 from .scripts.init_test_data import init_test_data
 
 load_dotenv()
@@ -30,6 +30,7 @@ app.include_router(teams.router)
 app.include_router(users.router)
 app.include_router(pull_requests.router)
 app.include_router(health.router)
+app.include_router(stats.router)
 
 
 if __name__ == "__main__":

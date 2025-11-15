@@ -92,3 +92,23 @@ class ErrorResponse(BaseModel):
                 }
             }
         }
+
+
+class TeamDeactivateRequest(BaseModel):
+    team_name: str
+    user_ids: List[str]
+
+
+class PRReassignmentInfo(BaseModel):
+    pull_request_id: str
+    pull_request_name: str
+    old_reviewer: str
+    new_reviewer: Optional[str] = None
+    status: str  # SUCCESS, NO_CANDIDATE, SKIPPED_MERGED
+
+
+class TeamDeactivateResponse(BaseModel):
+    deactivated_users: List[str]
+    failed_deactivations: List[str]
+    reassigned_prs: List[PRReassignmentInfo]
+    total_operations: int
