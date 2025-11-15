@@ -1,0 +1,41 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=$DATABASE_URL
+      - APP_HOST=$APP_HOST
+      - APP_PORT=$APP_PORT
+      - DEBUG=$DEBUG
+    depends_on:
+      - db
+    volumes:
+      - ./.env:/app/.env
+
+  db:
+    image: postgres:17
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com 
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin4/storage
+
+volumes:
+  postgres_data:
+  pgadmin_data:
