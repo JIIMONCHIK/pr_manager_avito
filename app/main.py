@@ -1,13 +1,10 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from dotenv import load_dotenv
 import os
 from . import models
 from .database import engine
 from .routers import teams, users, pull_requests, health, stats
 from .scripts.init_test_data import init_test_data
-
-load_dotenv()
 
 
 @asynccontextmanager

@@ -4,10 +4,10 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - DATABASE_URL=$DATABASE_URL
-      - APP_HOST=$APP_HOST
-      - APP_PORT=$APP_PORT
-      - DEBUG=$DEBUG
+      - DATABASE_URL=postgresql://user:password@db:5432/pr_reviewer
+      - APP_HOST=0.0.0.0
+      - APP_PORT=8080
+      - DEBUG=false
     depends_on:
       - db
     volumes:
@@ -16,9 +16,9 @@ services:
   db:
     image: postgres:17
     environment:
-      - POSTGRES_USER=$POSTGRES_USER
-      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
-      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pr_reviewer
     ports:
       - "5432:5432"
     volumes:
